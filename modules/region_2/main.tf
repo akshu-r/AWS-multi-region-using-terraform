@@ -89,4 +89,19 @@ resource "aws_instance" "web" {
   key_name                    = var.key_name
 
 }
+resource "aws_db_instance" "rds" {
+  allocated_storage      = 20
+  engine                 = "mysql"
+  engine_version         = "8.0"
+  instance_class         = "db.t3.micro"
+  username               = "admin"
+  password               = "admin1234"
+  skip_final_snapshot    = true
+}
+
+# S3
+resource "aws_s3_bucket" "bucket" {
+  bucket = "multi-region-demo-primary"
+  versioning { enabled = true }
+}
 
